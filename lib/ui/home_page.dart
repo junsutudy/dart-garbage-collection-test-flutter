@@ -1,4 +1,5 @@
 import 'package:dartgc/widget/sacrifice_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -12,25 +13,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late SacrificeWidget content;
-
-  @override
-  void initState() {
-    super.initState();
-    content = _buildSacrificeWidget();
-  }
+  SacrificeWidget? _content;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
+    return CupertinoPageScaffold(
+      child: SafeArea(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              content,
+              _content ?? const CircularProgressIndicator(),
+              const SizedBox(height: 20.0),
               FilledButton(
-                onPressed: _refreshUi,
+                onPressed: _content == null
+                    ? null
+                    : () => _refreshUi(),
                 child: const Text("초기화"),
               ),
             ],
@@ -40,12 +38,22 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void _refreshUi() {
+    setState(() {
+      _content = null;
+    });
+    Future.delayed(
+      const Duration(milliseconds: 300),
+      () {
+        setState(() {
+          _content = _buildSacrificeWidget();
+        });
+      },
+    );
+  }
+
   SacrificeWidget _buildSacrificeWidget() => SacrificeWidget(
         onOpenAndroidPage: () => context.go("/android"),
         onOpenIosPage: () => context.go("/ios"),
       );
-
-  void _refreshUi() {
-    content = _buildSacrificeWidget();
-  }
 }

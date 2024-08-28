@@ -1,7 +1,7 @@
 import 'package:dartgc/ui/android_page.dart';
 import 'package:dartgc/ui/home_page.dart';
 import 'package:dartgc/ui/ios_page.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
 void main() {
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return CupertinoApp.router(
       routerConfig: _router,
     );
   }

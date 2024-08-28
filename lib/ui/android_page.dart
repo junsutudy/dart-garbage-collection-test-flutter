@@ -5,11 +5,13 @@ class AndroidPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      "images/android_background.png",
-      width: double.infinity,
-      height: double.infinity,
-      fit: BoxFit.fitHeight,
+    return Scaffold(
+      body: Image.asset(
+        "assets/images/android_background.png",
+        width: double.infinity,
+        height: double.infinity,
+        fit: BoxFit.fitHeight,
+      ),
     );
   }
 }

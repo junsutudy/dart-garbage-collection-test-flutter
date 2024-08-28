@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class SacrificeWidget extends StatelessWidget {
+class SacrificeWidget extends StatefulWidget {
   final VoidCallback onOpenAndroidPage;
   final VoidCallback onOpenIosPage;
 
@@ -12,22 +12,40 @@ class SacrificeWidget extends StatelessWidget {
   });
 
   @override
+  State<SacrificeWidget> createState() => _SacrificeWidgetState();
+}
+
+class _SacrificeWidgetState extends State<SacrificeWidget> {
+  var showText = false;
+
+  @override
   Widget build(BuildContext context) {
     final widgets = [
       _buildButtonWithContext(context),
       _buildSpacer(),
-      _buildButtonWithoutContext(onOpenIosPage),
+      _buildButtonWithoutContext(widget.onOpenIosPage),
       _buildSpacer(),
       ..._buildNavigatorsWithContext(context),
       _buildSpacer(),
       ..._buildNavigatorsWithoutContext(
-        onOpenAndroidPage: onOpenAndroidPage,
-        onOpenIosPage: onOpenIosPage,
+        onOpenAndroidPage: widget.onOpenAndroidPage,
+        onOpenIosPage: widget.onOpenIosPage,
       ),
+      _buildSpacer(),
+      OutlinedButton(
+        onPressed: () => setState(() => showText = !showText),
+        child: const Text("추가 정보 보기"),
+      ),
+      Visibility(
+        visible: showText,
+        child: const Text("사실 추가 정보는 없습니다."),
+      )
     ];
 
     return Column(
-      children: widgets,
+      children: [
+        ...widgets,
+      ],
     );
   }
 
