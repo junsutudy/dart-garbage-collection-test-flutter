@@ -1,5 +1,6 @@
 import 'package:dartgc/widget/sacrifice_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -11,7 +12,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  SacrificeWidget content = const SacrificeWidget();
+  late SacrificeWidget content;
+
+  @override
+  void initState() {
+    super.initState();
+    content = _buildSacrificeWidget();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +29,10 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               content,
+              FilledButton(
+                onPressed: _refreshUi,
+                child: const Text("초기화"),
+              ),
             ],
           ),
         ),
@@ -29,7 +40,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  SacrificeWidget _buildSacrificeWidget() => SacrificeWidget(
+        onOpenAndroidPage: () => context.go("/android"),
+        onOpenIosPage: () => context.go("/ios"),
+      );
+
   void _refreshUi() {
-    content = const SacrificeWidget();
+    content = _buildSacrificeWidget();
   }
 }
