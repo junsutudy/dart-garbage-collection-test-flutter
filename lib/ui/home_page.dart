@@ -16,6 +16,12 @@ class _HomePageState extends State<HomePage> {
   SacrificeWidget? _content;
 
   @override
+  void initState() {
+    super.initState();
+    _content = _buildSacrificeWidget();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       child: SafeArea(
@@ -26,9 +32,7 @@ class _HomePageState extends State<HomePage> {
               _content ?? const CircularProgressIndicator(),
               const SizedBox(height: 20.0),
               FilledButton(
-                onPressed: _content == null
-                    ? null
-                    : () => _refreshUi(),
+                onPressed: _content == null ? null : () => _refreshUi(),
                 child: const Text("초기화"),
               ),
             ],
@@ -53,7 +57,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   SacrificeWidget _buildSacrificeWidget() => SacrificeWidget(
-        onOpenAndroidPage: () => context.go("/android"),
-        onOpenIosPage: () => context.go("/ios"),
+        onOpenAndroidPage: () => context.push("/android"),
+        onOpenIosPage: () => context.push("/ios"),
       );
 }

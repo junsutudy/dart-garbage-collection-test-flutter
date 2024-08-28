@@ -50,7 +50,7 @@ class _SacrificeWidgetState extends State<SacrificeWidget> {
   }
 
   Widget _buildButtonWithContext(BuildContext context) => OutlinedButton(
-        onPressed: () => context.go("/android"),
+        onPressed: () => context.push("/android"),
         child: const Text("Android 페이지 열기"),
       );
 
@@ -62,11 +62,11 @@ class _SacrificeWidgetState extends State<SacrificeWidget> {
 
   List<Widget> _buildNavigatorsWithContext(BuildContext context) => [
         ElevatedButton(
-          onPressed: () => context.go("/android"),
+          onPressed: () => context.push("/android"),
           child: const Text("Android 페이지 열기"),
         ),
         ElevatedButton(
-          onPressed: () => context.go("/ios"),
+          onPressed: () => context.push("/ios"),
           child: const Text("iOS 페이지 열기"),
         ),
       ];
