@@ -12,7 +12,7 @@ class SacrificeWidget extends StatefulWidget {
   });
 
   @override
-  State<SacrificeWidget> createState() => Builder(builder: builder) _SacrificeWidgetState();
+  State<SacrificeWidget> createState() => _SacrificeWidgetState();
 }
 
 class _SacrificeWidgetState extends State<SacrificeWidget> {
@@ -49,6 +49,12 @@ class _SacrificeWidgetState extends State<SacrificeWidget> {
         ...widgets,
       ],
     );
+  }
+
+  Widget _buildQrView() {
+    return Builder(builder: (context ) {
+      return Scaffold();
+    });
   }
 
   Widget _buildButtonWithContext(BuildContext context) => OutlinedButton(
