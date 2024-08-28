@@ -12,10 +12,12 @@ class SacrificeWidget extends StatefulWidget {
   });
 
   @override
-  State<SacrificeWidget> createState() => _SacrificeWidgetState();
+  State<SacrificeWidget> createState() => Builder(builder: builder) _SacrificeWidgetState();
 }
 
 class _SacrificeWidgetState extends State<SacrificeWidget> {
+
+
   var showText = false;
 
   @override
