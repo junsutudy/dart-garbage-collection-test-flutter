@@ -6,6 +6,9 @@ class IosPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+      navigationBar: const CupertinoNavigationBar(
+        leading: CupertinoNavigationBarBackButton(),
+      ),
       child: Image.asset(
         "assets/images/ios_background.png",
         width: double.infinity,
