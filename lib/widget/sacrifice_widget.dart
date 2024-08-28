@@ -5,9 +5,10 @@ class SacrificeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return const Text("하하하");
     return const Placeholder();
   }
-
+/*
   Widget _buildButtonWithContext(BuildContext context) {
 
   }
@@ -22,5 +23,5 @@ class SacrificeWidget extends StatelessWidget {
 
   List<Widget> _buildNavigatorsWithoutContext() {
 
-  }
+  }*/
 }

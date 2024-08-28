@@ -1,5 +1,8 @@
+import 'package:dartgc/ui/android_page.dart';
 import 'package:dartgc/ui/home_page.dart';
+import 'package:dartgc/ui/ios_page.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,15 +13,31 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const HomePage(),
+    return MaterialApp.router(
+      routerConfig: _router,
     );
   }
 }
 
-final goRouter = Router(routerDelegate: routerDelegate)
+final _router = GoRouter(
+  routes: [
+    GoRoute(
+      path: "/",
+      builder: (context, state) {
+        return const HomePage();
+      },
+    ),
+    GoRoute(
+      path: "/android",
+      builder: (context, state) {
+        return const AndroidPage();
+      },
+    ),
+    GoRoute(
+      path: "/ios",
+      builder: (context, state) {
+        return const IosPage();
+      },
+    ),
+  ],
+);

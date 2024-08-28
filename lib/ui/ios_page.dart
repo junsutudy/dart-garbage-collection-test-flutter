@@ -6,7 +6,7 @@ class IosPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      "images/ios_background",
+      "images/ios_background.png",
       width: double.infinity,
       height: double.infinity,
       fit: BoxFit.fitHeight,

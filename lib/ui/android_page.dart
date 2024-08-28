@@ -6,7 +6,7 @@ class AndroidPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      "images/android_background",
+      "images/android_background.png",
       width: double.infinity,
       height: double.infinity,
       fit: BoxFit.fitHeight,
