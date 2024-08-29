@@ -24,34 +24,36 @@ class MemoryTest extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            /*Expanded(
-              child: _buildOutlinedButtonWithContext(context),
-            ),*/
             Expanded(
-              child: StreamBuilder(
-                stream: timer,
-                builder: (builderContext, snapshot) {
-                  print(
-                      "LOGGINGLOGGING stream${builderContext.hashCode}@widget$hashCode: ${snapshot.data}");
-                  void onPressed() => Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (_) {
-                            return MemoryTest();
-                          },
-                        ),
-                      );
-                  return OutlinedButton(
-                    onPressed: onPressed,
-                    child: Text(
-                      "CLICK",
-                      style: TextStyle(
-                        color: Theme.of(context).canvasColor,
-                      ),
-                    ),
-                  );
-                },
-              ),
+              child: _buildOutlinedButtonWithContext(context),
             ),
+            /*Expanded(
+              child: () {
+                void onPressed() => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (_) {
+                          return MemoryTest();
+                        },
+                      ),
+                    );
+                return StreamBuilder(
+                  stream: timer,
+                  builder: (builderContext, snapshot) {
+                    print(
+                        "LOGGINGLOGGING stream${builderContext.hashCode}@widget$hashCode: ${snapshot.data}");
+                    return OutlinedButton(
+                      onPressed: onPressed,
+                      child: Text(
+                        "CLICK",
+                        style: TextStyle(
+                          color: Theme.of(context).canvasColor,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }(),
+            ),*/
           ],
         ),
       ),
@@ -63,19 +65,18 @@ class MemoryTest extends StatelessWidget {
       const Duration(milliseconds: 500),
       (int count) => count,
     );
-
+    void onPressed() => Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (_) {
+              return MemoryTest();
+            },
+          ),
+        );
     return StreamBuilder(
       stream: timer,
       builder: (builderContext, snapshot) {
         print(
             "LOGGINGLOGGING stream${builderContext.hashCode}@widget$hashCode: ${snapshot.data}");
-        void onPressed() => Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (_) {
-                  return MemoryTest();
-                },
-              ),
-            );
         return OutlinedButton(
           onPressed: onPressed,
           child: Text(
