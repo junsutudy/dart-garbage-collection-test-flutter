@@ -1,6 +1,6 @@
 import 'package:dartgc/ui/android_page.dart';
-import 'package:dartgc/ui/home_page.dart';
 import 'package:dartgc/ui/ios_page.dart';
+import 'package:dartgc/widget/memory_test.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
@@ -13,8 +13,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp.router(
+  /*  return CupertinoApp.router(
       routerConfig: _router,
+    );*/
+    return CupertinoApp(
+      home: MemoryTest(),
     );
   }
 }
@@ -24,7 +27,8 @@ final _router = GoRouter(
     GoRoute(
       path: "/",
       builder: (context, state) {
-        return const HomePage();
+        // return const HomePage();
+        return MemoryTest();
       },
     ),
     GoRoute(

@@ -16,11 +16,27 @@ class SacrificeWidget extends StatefulWidget {
 }
 
 class _SacrificeWidgetState extends State<SacrificeWidget> {
-
-
   var showText = false;
+  final timer = Stream.periodic(
+    const Duration(milliseconds: 200),
+    (int count) => count,
+  );
 
   @override
+  Widget build(BuildContext context) {
+    Widget content = OutlinedButton(
+      child: Text("CLICK"),
+      onPressed: () {
+        context.push("/android");
+      },
+    );
+    for (var i = 10; i-- > 0;) {
+      content = Padding(padding: EdgeInsets.all(0), child: content);
+    }
+    return content;
+  }
+
+  /*@override
   Widget build(BuildContext context) {
     final widgets = [
       _buildButtonWithContext(context),
@@ -49,18 +65,19 @@ class _SacrificeWidgetState extends State<SacrificeWidget> {
         ...widgets,
       ],
     );
-  }
+  }*/
 
-  Widget _buildQrView() {
-    return Builder(builder: (context ) {
-      return Scaffold();
-    });
+  Widget _buildButtonWithContext(BuildContext context) {
+    return StreamBuilder(
+      stream: timer,
+      builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+        return OutlinedButton(
+          onPressed: () => context.push("/android"),
+          child: Text("Android 페이지 열기 ${snapshot.data}"),
+        );
+      },
+    );
   }
-
-  Widget _buildButtonWithContext(BuildContext context) => OutlinedButton(
-        onPressed: () => context.push("/android"),
-        child: const Text("Android 페이지 열기"),
-      );
 
   Widget _buildButtonWithoutContext(VoidCallback onOpenIosPage) =>
       OutlinedButton(
