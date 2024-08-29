@@ -4,29 +4,49 @@ import 'package:flutter/material.dart';
 class MemoryTest extends StatelessWidget {
   MemoryTest({super.key});
 
-  final _ = List.generate(
-    1000000,
-    (index) => const EdgeInsets.all(0),
-  );
-
   @override
   Widget build(BuildContext context) {
+    final _ = List.generate(
+      100000,
+      (index) => Container(
+        color: Theme.of(context).canvasColor,
+      ),
+    );
+
+    final timer = Stream.periodic(
+      const Duration(milliseconds: 500),
+      (int count) => count,
+    );
+
     return CupertinoPageScaffold(
       child: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // _buildOutlinedButtonWithContext(context),
+            /*Expanded(
+              child: _buildOutlinedButtonWithContext(context),
+            ),*/
             Expanded(
-              child: OutlinedButton(
-                child: Text("CLICK"),
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (_) {
-                        return MemoryTest();
-                      },
+              child: StreamBuilder(
+                stream: timer,
+                builder: (builderContext, snapshot) {
+                  print(
+                      "LOGGINGLOGGING stream${builderContext.hashCode}@widget$hashCode: ${snapshot.data}");
+                  void onPressed() => Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (_) {
+                            return MemoryTest();
+                          },
+                        ),
+                      );
+                  return OutlinedButton(
+                    onPressed: onPressed,
+                    child: Text(
+                      "CLICK",
+                      style: TextStyle(
+                        color: Theme.of(context).canvasColor,
+                      ),
                     ),
                   );
                 },
@@ -39,18 +59,30 @@ class MemoryTest extends StatelessWidget {
   }
 
   Widget _buildOutlinedButtonWithContext(BuildContext context) {
-    return OutlinedButton(
-      child: Text("CLICK"),
-      onPressed: () {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (_) {
-              final _ = List.generate(
-                10000000,
-                (index) => const EdgeInsets.all(0),
-              );
-              return MemoryTest();
-            },
+    final timer = Stream.periodic(
+      const Duration(milliseconds: 500),
+      (int count) => count,
+    );
+
+    return StreamBuilder(
+      stream: timer,
+      builder: (builderContext, snapshot) {
+        print(
+            "LOGGINGLOGGING stream${builderContext.hashCode}@widget$hashCode: ${snapshot.data}");
+        void onPressed() => Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (_) {
+                  return MemoryTest();
+                },
+              ),
+            );
+        return OutlinedButton(
+          onPressed: onPressed,
+          child: Text(
+            "CLICK",
+            style: TextStyle(
+              color: Theme.of(context).canvasColor,
+            ),
           ),
         );
       },
